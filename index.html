@@ -63,7 +63,7 @@
     <button onclick="extractThumbnails()">썸네일 추출</button>
     <p>
         유튜브 썸네일을 추출하고 싶나요? 여기에 유튜브 링크를 넣기만 하면
-        고화질 썸네일을 빠르고 간단하게 추출할 수 있습니다..
+        고화질 썸네일을 빠르고 간단하게 추출할 수 있습니다.
     </p>
     <div id="thumbnailContainer" class="thumbnail-container"></div>
 <script>
@@ -89,13 +89,13 @@
                             <h3>${res.size}</h3>
                             <img src="${res.url}" alt="${res.size} 유튜브 썸네일 추출 결과">
                             <br>
-                            <button class="download-btn" onclick="downloadImage('${res.url}', '${videoID}_${res.size}.jpg')">다운로드</button>
+                            <a href="${res.url}" download>다운로드</a>
                         </div>
                     `;
                     container.innerHTML += html;
                 });
             } else {
-                alert('유효한 유튜브 링크를 입력해주세요.');
+                alert('유효한 유튜브 링크를 입력해주세요');
             }
         }
 
@@ -103,23 +103,6 @@
             const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/;
             const match = url.match(regex);
             return match ? match[1] : null;
-        }
-
-        function downloadImage(imageURL, filename) {
-            fetch(imageURL)
-                .then(response => response.blob())
-                .then(blob => {
-                    const url = window.URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.style.display = 'none';
-                    a.href = url;
-                    a.download = filename;
-                    document.body.appendChild(a);
-                    a.click();
-                    window.URL.revokeObjectURL(url);
-                    document.body.removeChild(a);
-                })
-                .catch(() => alert('이미지를 다운로드할 수 없습니다.'));
         }
 </script>
 </body>
