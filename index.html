@@ -90,6 +90,7 @@
                             <img src="${res.url}" alt="${res.size} 유튜브 썸네일 추출 결과">
                             <br>
                             <a href="${res.url}" download>다운로드</a>
+                            <button class="download-thumbnail-btn">다운로드</button>
                         </div>
                     `;
                     container.innerHTML += html;
@@ -104,6 +105,14 @@
             const match = url.match(regex);
             return match ? match[1] : null;
         }
+        
+        document.querySelector('.download-thumbnail-btn').addEventListener('click', function() {
+            alert('다운로드 준비중입니다.');
+            // const link = document.getElementById('youtubeLink').value;
+            // const videoID = extractVideoID(link);
+            // const filename = `${videoID}_${this.dataset.size}.jpg`;
+            // window.open(this.href, '_blank');
+        });
 </script>
 </body>
 </html>
