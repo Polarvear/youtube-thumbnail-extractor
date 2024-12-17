@@ -60,12 +60,12 @@
 <body>
     <h1>유튜브 썸네일 추출기</h1>
     <input type="text" id="youtubeLink" placeholder="유튜브 링크를 입력하세요">
-    <button onclick="extractThumbnail()">썸네일 추출</button>
+    <button onclick="extractThumbnails()">썸네일 추출</button>
     <p>
         유튜브 썸네일을 추출하고 싶나요? 여기에 유튜브 링크를 넣기만 하면
         고화질 썸네일을 빠르고 간단하게 추출할 수 있습니다.
     </p>
-<div id="thumbnailResult"></div>
+    <div id="thumbnailContainer" class="thumbnail-container"></div>
 <script>
     function extractThumbnails() {
             const link = document.getElementById('youtubeLink').value;
