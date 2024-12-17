@@ -107,12 +107,9 @@
             return match ? match[1] : null;
         }
 
-        $('.download-thumbnail-btn').on('click', function() {
-                // const imageURL = $(this).data('url');
-                // const filename = $(this).data('filename');
-                // downloadImage(imageURL, filename);
-                alert('다운로드 준비중입니다.');
-            });
+        $(document).on("click",".download-thumbnail-btn",function(){
+            alert('다운로드 준비중입니다.');
+        });
 
 </script>
 </body>
