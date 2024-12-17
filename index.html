@@ -10,13 +10,42 @@
     <meta name="keywords" content="유튜브 썸네일, 썸네일 추출, 유튜브 이미지 다운로드, 유튜브 썸네일 다운로드">
     <meta name="google-site-verification" content="q_8oCqXR8Y0TCfD6lxGaaBghNSGZlN39BlwaEQoDXIs" />
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
         input, button {
-        padding: 10px;
-        margin: 5px;
+            padding: 10px;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .thumbnail-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .thumbnail-item {
+            margin-bottom: 20px;
+            text-align: center;
         }
         img {
-        margin-top: 10px;
-        border: 1px solid #ccc;
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+        }
+        a {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #0056b3;
         }
         @media (max-width: 768px) {
             body {
@@ -34,29 +63,47 @@
     <button onclick="extractThumbnail()">썸네일 추출</button>
     <p>
         유튜브 썸네일을 추출하고 싶나요? 여기에 유튜브 링크를 넣기만 하면
-        고화질 썸네일을 빠르고 간단하게 추출할 수 있습니다..
+        고화질 썸네일을 빠르고 간단하게 추출할 수 있습니다.
     </p>
 <div id="thumbnailResult"></div>
 <script>
-    function extractThumbnail() {
-    const link = document.getElementById('youtubeLink').value;
-    const videoID = extractVideoID(link);
-        if (videoID) {
-        const thumbnailURL = `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`;
-        document.getElementById('thumbnailResult').innerHTML = `
-            <img src="${thumbnailURL}" alt="유튜브 썸네일 추출 결과" width="300">
-            <a href="${thumbnailURL}" download>썸네일 다운로드</a>
-        `;
-        } else {
-            alert('유효한 유튜브 링크를 입력해주세요.');
-        }
-    }   
+    function extractThumbnails() {
+            const link = document.getElementById('youtubeLink').value;
+            const videoID = extractVideoID(link);
 
-    function extractVideoID(url) {
-        const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)|youtu\.be\/([^&]+)/;
-        const match = url.match(regex);
-        return match ? match[1] || match[2] : null;
-    }
+            if (videoID) {
+                const resolutions = [
+                    { size: '최대 해상도', url: `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg` },
+                    { size: '표준 해상도', url: `https://img.youtube.com/vi/${videoID}/sddefault.jpg` },
+                    { size: '고화질', url: `https://img.youtube.com/vi/${videoID}/hqdefault.jpg` },
+                    { size: '중화질', url: `https://img.youtube.com/vi/${videoID}/mqdefault.jpg` },
+                    { size: '저화질', url: `https://img.youtube.com/vi/${videoID}/default.jpg` }
+                ];
+
+                const container = document.getElementById('thumbnailContainer');
+                container.innerHTML = '';
+
+                resolutions.forEach(res => {
+                    const html = `
+                        <div class="thumbnail-item">
+                            <h3>${res.size}</h3>
+                            <img src="${res.url}" alt="${res.size} 유튜브 썸네일 추출 결과">
+                            <br>
+                            <a href="${res.url}" download>다운로드</a>
+                        </div>
+                    `;
+                    container.innerHTML += html;
+                });
+            } else {
+                alert('유효한 유튜브 링크를 입력해주세요.');
+            }
+        }
+
+        function extractVideoID(url) {
+            const regex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\s]+)/;
+            const match = url.match(regex);
+            return match ? match[1] : null;
+        }
 </script>
 </body>
 </html>
