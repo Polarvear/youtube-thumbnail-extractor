@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>유튜브 썸네일 추출 - 빠르고 간단하게!</title>
+    <meta name="description" content="유튜브 링크만 입력하면 썸네일 이미지를 빠르게 추출하고 다운로드할 수 있습니다.">
+    <meta name="keywords" content="유튜브 썸네일, 썸네일 추출, 유튜브 이미지 다운로드, 유튜브 썸네일 다운로드">
     <style>
         input, button {
         padding: 10px;
@@ -13,10 +17,23 @@
         margin-top: 10px;
         border: 1px solid #ccc;
         }
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            input, button {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
+    <h1>유튜브 썸네일 추출기</h1>
     <input type="text" id="youtubeLink" placeholder="유튜브 링크를 입력하세요">
+    <p>
+        유튜브 썸네일을 추출하고 싶나요? 여기에 유튜브 링크를 넣기만 하면
+        고화질 썸네일을 빠르고 간단하게 추출할 수 있습니다.
+    </p>
 <button onclick="extractThumbnail()">썸네일 추출</button>
 <div id="thumbnailResult"></div>
 <script>
@@ -26,7 +43,7 @@
         if (videoID) {
         const thumbnailURL = `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`;
         document.getElementById('thumbnailResult').innerHTML = `
-            <img src="${thumbnailURL}" alt="썸네일" width="300">
+            <img src="${thumbnailURL}" alt="유튜브 썸네일 추출 결과" width="300">
             <a href="${thumbnailURL}" download>썸네일 다운로드</a>
         `;
         } else {
