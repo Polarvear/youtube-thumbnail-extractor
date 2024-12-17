@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input, button {
+        padding: 10px;
+        margin: 5px;
+        }
+        img {
+        margin-top: 10px;
+        border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="youtubeLink" placeholder="유튜브 링크를 입력하세요">
+<button onclick="extractThumbnail()">썸네일 추출</button>
+<div id="thumbnailResult"></div>
+<script>
+    function extractThumbnail() {
+    const link = document.getElementById('youtubeLink').value;
+    const videoID = extractVideoID(link);
+        if (videoID) {
+        const thumbnailURL = `https://img.youtube.com/vi/${videoID}/maxresdefault.jpg`;
+        document.getElementById('thumbnailResult').innerHTML = `
+            <img src="${thumbnailURL}" alt="썸네일" width="300">
+            <a href="${thumbnailURL}" download>썸네일 다운로드</a>
+        `;
+        } else {
+            alert('유효한 유튜브 링크를 입력해주세요.');
+        }
+    }   
+
+    function extractVideoID(url) {
+        const regex = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)|youtu\.be\/([^&]+)/;
+        const match = url.match(regex);
+        return match ? match[1] || match[2] : null;
+    }
+</script>
+</body>
+</html>
