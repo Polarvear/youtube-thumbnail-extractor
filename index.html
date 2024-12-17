@@ -56,6 +56,7 @@
             }
         }
     </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>유튜브 썸네일 추출기</h1>
@@ -105,14 +106,14 @@
             const match = url.match(regex);
             return match ? match[1] : null;
         }
-        
-        document.querySelector('.download-thumbnail-btn').addEventListener('click', function() {
-            alert('다운로드 준비중입니다.');
-            // const link = document.getElementById('youtubeLink').value;
-            // const videoID = extractVideoID(link);
-            // const filename = `${videoID}_${this.dataset.size}.jpg`;
-            // window.open(this.href, '_blank');
-        });
+
+        $('.download-thumbnail-btn').on('click', function() {
+                // const imageURL = $(this).data('url');
+                // const filename = $(this).data('filename');
+                // downloadImage(imageURL, filename);
+                alert('다운로드 준비중입니다.');
+            });
+
 </script>
 </body>
 </html>
